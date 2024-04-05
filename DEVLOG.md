@@ -1,3 +1,7 @@
+- [ ] fast way to add ignore companies from webpage (inject x button next to company name)
+  - guess this means block jobs will use localStorage tied to website
+    none of this info is secret so doesn't really matter but it's nice to have secure context it's possible via background.js and an API/db but more work
+
 ### 04/04/2024
 
 7:16 PM
