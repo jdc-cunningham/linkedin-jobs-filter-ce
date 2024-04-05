@@ -21,3 +21,9 @@ Alright code injected, still using manifest 2, briefly tried 3 but immediately t
 <img src="./devlog-images/alive.JPG"/>
 
 Ahh man... I have to remember the communication process between background.js and other context if necessary
+
+7:43 PM
+
+Ugh... eyes hurt, will try again later today while I'm applying.
+
+Should be 2 hours from now or so
