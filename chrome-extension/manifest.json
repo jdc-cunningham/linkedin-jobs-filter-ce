@@ -21,5 +21,5 @@
         "js": ["script-loader.js"]
     }
 ],
-"web_accessible_resources": ["jc-script.js"]
+"web_accessible_resources": ["block.js", "jc-script.js"]
 }

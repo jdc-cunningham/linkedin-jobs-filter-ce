@@ -1,9 +1,16 @@
-var s = document.createElement('script');
+const scriptsToLoad = [
+  'block.js',
+  'jc-script.js' // jc -> job chan
+];
 
-s.src = chrome.extension.getURL('jc-script.js'); // job chan
+scriptsToLoad.forEach(script => {
+  var s = document.createElement('script');
 
-(document.head||document.documentElement).appendChild(s);
+  s.src = chrome.extension.getURL(script);
 
-s.onload = function() {
-  s.parentNode.removeChild(s);
-};
+  (document.head||document.documentElement).appendChild(s);
+
+  s.onload = function() {
+    s.parentNode.removeChild(s);
+  };
+});
