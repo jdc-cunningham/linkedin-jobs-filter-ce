@@ -8,8 +8,6 @@ const addGenericClickHandler = () => {
     const comp = thisGrandParent.querySelector('.job-card-container__primary-description');
     const compName = comp.innerText;
 
-    console.log('click', compName);
-
     if (targClass.includes('lijfce-btns__block') && compName) {
       blockCompany(compName);
     }
