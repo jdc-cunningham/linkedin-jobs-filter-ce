@@ -37,6 +37,7 @@ const listenToJobsPanelScroll = async () => {
   bindScrollEvent(jobPanel);
 }
 
+// first load, starts here
 window.onload = async () => {
   console.log('alive');
 
