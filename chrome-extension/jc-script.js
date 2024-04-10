@@ -1,6 +1,22 @@
 let allBlockedJobs = [];
 
-const bindScrollEvent = (jobsPanel) => jobsPanel.addEventListener('scrollend', () => console.log('scroll end'));
+const filterJobs = (blockedCompanies) => {
+  document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
+    const comp = jobNode.querySelector('.job-card-container__primary-description');
+    const compName = comp.innerText;
+  
+    if (blockedCompanies.includes(compName)) {
+      jobNode.remove();
+    }
+  });
+}
+
+const bindScrollEvent = (jobsPanel) => jobsPanel.addEventListener('scrollend', () => {
+  // after scrolling apply filters
+  if (allBlockedJobs.length) {
+    filterJobs(allBlockedJobs);
+  }
+});
 
 const getJobPanel = () => document.querySelector('.jobs-search-results-list');
 
@@ -24,11 +40,15 @@ const waitForJobsPanel = () => new Promise(resolve => {
 // load from localStorage
 const loadBlockedJobs = () => {
   // from block.js
-  if (blockedCompanies) {
-    console.log(blockedCompanies);
+  if (blockedCompanies && blockedCompanies.length) {
+    allBlockedJobs.push(...blockedCompanies);
   }
 
-  const blockedJobsLs = localStorage.getItem('linkedin-blocked-jobs');
+  const blockedJobsLs = JSON.parse(localStorage.getItem('linkedin-blocked-jobs'));
+
+  if (blockedJobsLs && blockedJobsLs.length) {
+    allBlockedJobs.push(...blockedJobsLs);
+  }
 }
 
 const listenToJobsPanelScroll = async () => {
@@ -39,8 +59,6 @@ const listenToJobsPanelScroll = async () => {
 
 // first load, starts here
 window.onload = async () => {
-  console.log('alive');
-
-  listenToJobsPanelScroll();
   loadBlockedJobs();
+  listenToJobsPanelScroll();
 };
