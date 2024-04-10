@@ -2,6 +2,42 @@
   - guess this means block jobs will use localStorage tied to website
     none of this info is secret so doesn't really matter but it's nice to have secure context it's possible via background.js and an API/db but more work
 
+### 04/10/2024
+
+10:31 AM
+
+Alright finally putting some time down on this
+
+I did not sleep that great, currently distracted by my AC being broken/waiting for person to come in and fix it and also my missed payments/overdraft bank account
+
+Turns out quitting a six fig remote job without a plan is a mistake (while also being in a lot of debt with high monthly payments)
+
+10:43 AM
+
+Struggling... I ran out of creamer so I'm drinking half as strong coffee straight up, it's nasty
+
+11:38 AM
+
+Still screwing around, social media scrolling
+
+Let's go now
+
+One of the main mechanisms for this extension is the scrolling job sidebar, it does some lazy loading
+
+So the filter has to run after you stop scrolling this section
+
+12:20 PM
+
+making some progress, still trying to put it together, next is to inject buttons to remove stuff easily
+
+### 04/08/2024
+
+1:48 PM
+
+Man... I slept way too long today
+
+Like 12 hrs
+
 ### 04/04/2024
 
 7:16 PM
