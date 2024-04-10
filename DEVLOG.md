@@ -46,6 +46,14 @@ Just distracted
 
 Progress is slow, this is not hard to do I'm just mentally all over the place right now
 
+2:57 PM
+
+It's so funny how there are so many things being blocked by ublock origin on LinkedIn the devtools freezes
+
+Then my code tries to run on top of that like ugh
+
+
+
 ### 04/08/2024
 
 1:48 PM

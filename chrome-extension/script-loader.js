@@ -1,6 +1,6 @@
 const scriptsToLoad = [
   'block.js',
-  'jc-script.js' // jc -> job chan
+  'lijfce.js'
 ];
 
 scriptsToLoad.forEach(script => {
