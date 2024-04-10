@@ -1,4 +1,4 @@
-const blockCompanies = [
+const blockedCompanies = [
   'Some Company',
   'Another Company',
   'etc...'

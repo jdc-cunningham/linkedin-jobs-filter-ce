@@ -42,6 +42,10 @@ Alright trying again now
 
 Just distracted
 
+1:48 PM
+
+Progress is slow, this is not hard to do I'm just mentally all over the place right now
+
 ### 04/08/2024
 
 1:48 PM
