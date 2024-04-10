@@ -1,5 +1,39 @@
 let allBlockedJobs = [];
 
+// lol
+const applyAppliedFilter = () => {
+  const appliedCompanies = JSON.parse(localStorage.getItem('lijfce-applied-companies'));
+
+  if (appliedCompanies && appliedCompanies.length) {
+    document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
+      const comp = jobNode.querySelector('.job-card-container__primary-description');
+      const compName = comp.innerText;
+
+      if (appliedCompanies.includes(compName)) {
+        jobNode.style.backgroundColor = '#AFE1AF';
+      }
+    });
+
+    const statsPanel = document.querySelector('.lijfce__stats-panel span');
+
+    statsPanel.innerText = `Applied to ${appliedCompanies.length} jobs`;
+  }
+}
+
+const appliedToCompany = (companyName) => {
+  const appliedCompanies = JSON.parse(localStorage.getItem('lijfce-applied-companies'));
+
+  if (appliedCompanies && !appliedCompanies.includes(companyName)) {
+    appliedCompanies.push(companyName);
+
+    localStorage.setItem('lijfce-applied-companies', JSON.stringify(appliedCompanies));
+  } else {
+    localStorage.setItem('lijfce-applied-companies', JSON.stringify([companyName]));
+  }
+
+  applyAppliedFilter();
+}
+
 const addGenericClickHandler = () => {
   document.addEventListener('click', (e) => {
     const targClass = Array.from(e.target.classList);
@@ -13,7 +47,7 @@ const addGenericClickHandler = () => {
     }
 
     if (targClass.includes('lijfce-btns__applied') && compName) {
-      alert('applied');
+      appliedToCompany(compName);
     }
   });
 }
@@ -121,8 +155,10 @@ const listenToJobsPanelScroll = async () => {
 }
 
 const injectStatsPanel = () => {
+  const appliedCompanies = JSON.parse(localStorage.getItem('lijfce-applied-companies'));
+
   const statsPanel = `<div class="lijfce__stats-panel">
-    <span>Applied to 0 jobs</span>
+    <span>Applied to ${appliedCompanies.length} jobs</span>
   </div>`;
 
   document.querySelector('.scaffold-layout-toolbar').innerHTML += statsPanel;
@@ -136,5 +172,6 @@ window.onload = async () => {
 
   setTimeout(() => {
     injectStatsPanel(); // appears under job filter bar
+    applyAppliedFilter();
   }, 3000);
 };
