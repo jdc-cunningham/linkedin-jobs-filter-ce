@@ -30,3 +30,7 @@ When you modify files in a loaded extension you have to refresh it in the Chrome
 ### Manifest v2
 
 I have not updated my extensions to use v3 yet
+
+### Disclaimer
+
+Not affiliated with LinkedIn
