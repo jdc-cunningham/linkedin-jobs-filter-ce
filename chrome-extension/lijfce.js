@@ -7,10 +7,11 @@ const applyAppliedFilter = () => {
   if (appliedCompanies && appliedCompanies.length) {
     document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
       const comp = jobNode.querySelector('.job-card-container__primary-description');
-      const compName = comp.innerText;
+      const compName = comp?.innerText;
 
       if (appliedCompanies.includes(compName)) {
         jobNode.style.backgroundColor = '#AFE1AF';
+        jobNode.style.border = '2px solid green';
       }
     });
 
@@ -49,16 +50,18 @@ const addGenericClickHandler = () => {
     if (targClass.includes('lijfce-btns__applied') && compName) {
       appliedToCompany(compName);
     }
+
+    e.preventDefault();
   });
 }
 
 const injectButtons = () => {
   document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
     const comp = jobNode.querySelector('.job-card-container__primary-description');
-    const compNodeParent = comp.parentElement;
+    const compNodeParent = comp?.parentElement;
 
     // check if buttons not already in place
-    const btns = compNodeParent.querySelector('.lijfce-btns');
+    const btns = compNodeParent?.querySelector('.lijfce-btns');
 
     if (!btns) {
       // inject btns with attributes
