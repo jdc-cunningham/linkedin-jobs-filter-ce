@@ -52,9 +52,11 @@ const addGenericClickHandler = () => {
     }
 
     if (targClass.includes('job-card-list')) {
-      setTimeout(() => {
+      const jobDesc = document.querySelector('.jobs-description-content__text');
 
-        const jobDesc = document.querySelector('.jobs-description-content__text');
+      jobDesc.style.backgroundColor = '#ffffff'; // reset back to white
+
+      setTimeout(() => {
         const jobText = jobDesc.innerText.toLowerCase();
         const matchDegreeWords = ['degree', "bachelor's", "master's"];
         const blockedStack = ['.net', 'drupal', 'ios', 'swift', 'c#', 'c++'];
@@ -64,7 +66,7 @@ const addGenericClickHandler = () => {
         } else if (blockedStack.some(stack => jobText.includes(stack))) {
           jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
         }
-      }, 1000);
+      }, 2000);
     }
 
     e.preventDefault();
