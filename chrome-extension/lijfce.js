@@ -51,6 +51,22 @@ const addGenericClickHandler = () => {
       appliedToCompany(compName);
     }
 
+    if (targClass.includes('job-card-list')) {
+      setTimeout(() => {
+
+        const jobDesc = document.querySelector('.jobs-description-content__text');
+        const jobText = jobDesc.innerText.toLowerCase();
+        const matchDegreeWords = ['degree', "bachelor's", "master's"];
+        const blockedStack = ['.net', 'drupal', 'ios', 'swift', 'c#', 'c++'];
+        
+        if (matchDegreeWords.some(word => jobText.includes(word))) {
+          jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+        } else if (blockedStack.some(stack => jobText.includes(stack))) {
+          jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+        }
+      }, 1000);
+    }
+
     e.preventDefault();
   });
 }
