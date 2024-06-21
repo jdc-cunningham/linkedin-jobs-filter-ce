@@ -160,11 +160,13 @@ const listenToJobsPanelScroll = async () => {
 const injectStatsPanel = () => {
   const appliedCompanies = JSON.parse(localStorage.getItem('lijfce-applied-companies'));
 
-  const statsPanel = `<div class="lijfce__stats-panel">
-    <span>Applied to ${appliedCompanies ? appliedCompanies.length : 0} jobs</span>
-  </div>`;
+  const statsDiv = document.createElement('div');
+  const statsSpan = document.createElement('span');
 
-  document.querySelector('.scaffold-layout-toolbar').innerHTML += statsPanel;
+  statsSpan.innerText = `Applied to ${appliedCompanies ? appliedCompanies.length : 0} jobs`;
+  statsDiv.appendChild(statsSpan);
+  statsDiv.setAttribute('class', 'lijfce__stats-panel');
+  document.querySelector('.scaffold-layout-toolbar').appendChild(statsDiv);
 }
 
 // first load, starts here
