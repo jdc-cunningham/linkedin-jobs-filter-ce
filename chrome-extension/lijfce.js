@@ -59,14 +59,14 @@ const addGenericClickHandler = () => {
       setTimeout(() => {
         const jobText = jobDesc.innerText.toLowerCase();
         const matchDegreeWords = ['degree', "bachelor's", "master's"];
-        const blockedStack = ['.net', 'drupal', 'ios', 'swift', 'c#', 'c++'];
+        const blockedStack = ['.net', 'drupal', 'ios', 'swift', 'c#', 'c++', 'springboot', 'kotlin'];
         
         if (matchDegreeWords.some(word => jobText.includes(word))) {
           jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
         } else if (blockedStack.some(stack => jobText.includes(stack))) {
           jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
         }
-      }, 2000);
+      }, 500);
     }
 
     e.preventDefault();
