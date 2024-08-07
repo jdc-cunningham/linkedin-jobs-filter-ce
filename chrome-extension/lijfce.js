@@ -191,6 +191,24 @@ const injectStatsPanel = () => {
   document.querySelector('.scaffold-layout-toolbar').appendChild(statsDiv);
 }
 
+// get msgs from popup ui
+chrome.runtime.onMessage.addListener((request, sender, callback) => {
+  const msg = request;
+
+  console.log(msg);
+
+  if (msg?.applied) {
+    console.log('applied', msg.applied);
+  }
+
+  if (msg?.block) {
+    console.log('block', msg.block);
+  }
+
+  // sendMessageToLogic('from dom');
+  callback('dom ack');
+});
+
 // first load, starts here
 window.onload = async () => {
   loadBlockedJobs();
