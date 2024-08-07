@@ -46,7 +46,7 @@ const addGenericClickHandler = () => {
       setTimeout(() => {
         const jobText = jobDesc.innerText.toLowerCase();
         
-        if (matchDegreeWords.some(word => jobText.includes(word))) {
+        if (matchDegreeWords.some(word => jobText.includes(word) && !(jobText.includes('equivalent') && jobText.includes('experience')))) {
           jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
         } else if (blockedStack.some(stack => jobText.includes(stack))) {
           jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
