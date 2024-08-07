@@ -44,14 +44,6 @@ const addGenericClickHandler = () => {
     const comp2 = jobNode.querySelector('.artdeco-entity-lockup__subtitle');
     const compName = comp?.innerText ?? comp2?.innerText;
 
-    if (targClass.includes('lijfce-btns__block') && compName) {
-      blockCompany(compName);
-    }
-
-    if (targClass.includes('lijfce-btns__applied') && compName) {
-      appliedToCompany(compName);
-    }
-
     if (targClass.includes('job-card-list')) {
       const jobDesc = document.querySelector('.jobs-description-content__text');
 
@@ -74,29 +66,6 @@ const addGenericClickHandler = () => {
   });
 }
 
-const injectButtons = () => {
-  // skipping this for now since their anti-html thing screws it up
-
-  // document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
-  //   const comp = jobNode.querySelector('.job-card-container__primary-description');
-  //   const comp2 = jobNode.querySelector('.artdeco-entity-lockup__subtitle');
-  //   const compNodeParent = comp?.parentElement ?? comp2;
-
-  //   // check if buttons not already in place
-  //   const btns = compNodeParent?.querySelector('.lijfce-btns');
-
-  //   if (!btns) {
-  //     // inject btns with attributes
-  //     const customBtns = `<div class="lijfce-btns">
-  //       <div class="lijfce-btns__block" title="block company">x</div>
-  //       <div class="lijfce-btns__applied" title="applied">+</div>
-  //     </div>`;
-
-  //     jobNode.innerHTML += customBtns;
-  //   }
-  // });
-}
-
 const filterJobs = (blockedCompanies) => {
   document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
     const comp = jobNode.querySelector('.job-card-container__primary-description');
@@ -106,8 +75,6 @@ const filterJobs = (blockedCompanies) => {
       jobNode.remove();
     }
   });
-
-  injectButtons();
 }
 
 const bindScrollEvent = (jobsPanel) => jobsPanel.addEventListener('scrollend', () => {
@@ -173,10 +140,6 @@ const listenToJobsPanelScroll = async () => {
   const jobPanel = await waitForJobsPanel();
 
   bindScrollEvent(jobPanel);
-
-  setTimeout(() => {
-    injectButtons();
-  }, 1500); // job panel re-renders
 }
 
 const injectStatsPanel = () => {
@@ -195,14 +158,12 @@ const injectStatsPanel = () => {
 chrome.runtime.onMessage.addListener((request, sender, callback) => {
   const msg = request;
 
-  console.log(msg);
-
   if (msg?.applied) {
-    console.log('applied', msg.applied);
+    appliedToCompany(msg.applied);
   }
 
   if (msg?.block) {
-    console.log('block', msg.block);
+    blockCompany(msg.block);
   }
 
   // sendMessageToLogic('from dom');
