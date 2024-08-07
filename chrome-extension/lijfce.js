@@ -41,7 +41,8 @@ const addGenericClickHandler = () => {
     const thisParent = e.target.parentElement;
     const thisGrandParent = thisParent.parentElement;
     const comp = thisGrandParent.querySelector('.job-card-container__primary-description');
-    const compName = comp.innerText;
+    const comp2 = jobNode.querySelector('.artdeco-entity-lockup__subtitle');
+    const compName = comp?.innerText ?? comp2?.innerText;
 
     if (targClass.includes('lijfce-btns__block') && compName) {
       blockCompany(compName);
@@ -76,7 +77,8 @@ const addGenericClickHandler = () => {
 const injectButtons = () => {
   document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
     const comp = jobNode.querySelector('.job-card-container__primary-description');
-    const compNodeParent = comp?.parentElement;
+    const comp2 = jobNode.querySelector('.artdeco-entity-lockup__subtitle');
+    const compNodeParent = comp?.parentElement ?? comp2;
 
     // check if buttons not already in place
     const btns = compNodeParent?.querySelector('.lijfce-btns');
@@ -84,11 +86,11 @@ const injectButtons = () => {
     if (!btns) {
       // inject btns with attributes
       const customBtns = `<div class="lijfce-btns">
-        <button type="button" class="lijfce-btns__block" title="block company">x</button>
-        <button type="button" class="lijfce-btns__applied" title="applied">+</button>
+        <div class="lijfce-btns__block" title="block company">x</div>
+        <div class="lijfce-btns__applied" title="applied">+</div>
       </div>`;
 
-      compNodeParent.innerHTML += customBtns;
+      // compNodeParent.innerHTML += customBtns;
     }
   });
 }
