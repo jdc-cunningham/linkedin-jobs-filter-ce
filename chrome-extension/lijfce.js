@@ -1,5 +1,3 @@
-let allBlockedJobs = [];
-
 // lol
 const applyAppliedFilter = () => {
   const appliedCompanies = JSON.parse(localStorage.getItem('lijfce-applied-companies'));
@@ -14,10 +12,6 @@ const applyAppliedFilter = () => {
         jobNode.style.border = '2px solid green';
       }
     });
-
-    const statsPanel = document.querySelector('.lijfce__stats-panel span');
-
-    statsPanel.innerText = `Applied to ${appliedCompanies.length} jobs`;
   }
 }
 
@@ -41,7 +35,7 @@ const addGenericClickHandler = () => {
     const thisParent = e.target.parentElement;
     const thisGrandParent = thisParent.parentElement;
     const comp = thisGrandParent.querySelector('.job-card-container__primary-description');
-    const comp2 = jobNode.querySelector('.artdeco-entity-lockup__subtitle');
+    const comp2 = comp.querySelector('.artdeco-entity-lockup__subtitle');
     const compName = comp?.innerText ?? comp2?.innerText;
 
     if (targClass.includes('job-card-list')) {
@@ -66,22 +60,19 @@ const addGenericClickHandler = () => {
   });
 }
 
-const filterJobs = (blockedCompanies) => {
+const filterJobs = (blockedTitles) => {
   document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
-    const comp = jobNode.querySelector('.job-card-container__primary-description');
-    const compName = comp?.innerText;
+    const title = jobNode.querySelector('.job-card-list__title');
+    const titleText = title?.innerText.toLowerCase();
 
-    if (compName && blockedCompanies.includes(compName)) {
+    if (titleText && blockedTitles.some(title => titleText.includes(title))) {
       jobNode.remove();
     }
   });
 }
 
 const bindScrollEvent = (jobsPanel) => jobsPanel.addEventListener('scrollend', () => {
-  // after scrolling apply filters
-  if (allBlockedJobs.length) {
-    filterJobs(allBlockedJobs);
-  }
+  filterJobs(blockedTitles);
 });
 
 const getJobPanel = () => document.querySelector('.jobs-search-results-list');
@@ -102,56 +93,10 @@ const waitForJobsPanel = () => new Promise(resolve => {
   wait();
 });
 
-const blockCompany = (companyName) => {
-  if (!allBlockedJobs.includes(companyName)) {
-    const blockedJobsLs = JSON.parse(localStorage.getItem('lijfce-blocked-companies'));
-
-    if (!blockedJobsLs?.length) {
-      localStorage.setItem('lijfce-blocked-companies', JSON.stringify([companyName]))
-    } else {
-      blockedJobsLs.push(companyName);
-      localStorage.setItem('lijfce-blocked-companies', JSON.stringify(blockedJobsLs));
-    }
-
-    loadBlockedJobs();
-  }
-}
-
-// load from block.js (first run)
-// load from localStorage
-const loadBlockedJobs = () => {
-  allBlockedJobs = []; // reset
-
-  // from block.js
-  if (blockedCompanies && blockedCompanies.length) {
-    allBlockedJobs.push(...blockedCompanies);
-  }
-
-  const blockedJobsLs = JSON.parse(localStorage.getItem('lijfce-blocked-companies'));
-
-  if (blockedJobsLs && blockedJobsLs.length) {
-    allBlockedJobs.push(...blockedJobsLs);
-  }
-
-  filterJobs(allBlockedJobs);
-}
-
 const listenToJobsPanelScroll = async () => {
   const jobPanel = await waitForJobsPanel();
 
   bindScrollEvent(jobPanel);
-}
-
-const injectStatsPanel = () => {
-  const appliedCompanies = JSON.parse(localStorage.getItem('lijfce-applied-companies'));
-
-  const statsDiv = document.createElement('div');
-  const statsSpan = document.createElement('span');
-
-  statsSpan.innerText = `Applied to ${appliedCompanies ? appliedCompanies.length : 0} jobs`;
-  statsDiv.appendChild(statsSpan);
-  statsDiv.setAttribute('class', 'lijfce__stats-panel');
-  document.querySelector('.scaffold-layout-toolbar').appendChild(statsDiv);
 }
 
 // get msgs from popup ui
@@ -172,12 +117,10 @@ chrome.runtime.onMessage.addListener((request, sender, callback) => {
 
 // first load, starts here
 window.onload = async () => {
-  loadBlockedJobs();
   listenToJobsPanelScroll();
   addGenericClickHandler();
 
   setTimeout(() => {
-    injectStatsPanel(); // appears under job filter bar
     applyAppliedFilter();
   }, 3000);
 };

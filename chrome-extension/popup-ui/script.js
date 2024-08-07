@@ -19,8 +19,9 @@ appliedBtn.addEventListener('click', () => {
   });
 });
 
+// not used anymore
 blockBtn.addEventListener('click', () => {
-  if (validate()) sendMessageToDomFilter({
-    block: textBox.value,
-  });
+  // if (validate()) sendMessageToDomFilter({
+  //   block: textBox.value,
+  // });
 });

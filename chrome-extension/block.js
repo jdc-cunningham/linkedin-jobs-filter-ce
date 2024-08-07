@@ -1,6 +1,9 @@
-const personal = [
-];
-
-const blockedCompanies = [
-  ...personal,
+const blockedTitles = [
+  'staff',
+  'sr',
+  'lead',
+  'senior',
+  'platform',
+  'devops',
+  'sdet'
 ];
