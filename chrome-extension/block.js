@@ -1,3 +1,6 @@
+const personal = [
+];
+
 const blockedCompanies = [
-  // put starting companies here
+  ...personal,
 ];

@@ -9,7 +9,8 @@
     "128": "icon128.png"
   },
   "browser_action": {
-    "default_icon": "icon16.png"
+    "default_icon": "icon16.png",
+    "default_popup": "./popup-ui/index.html"
   },
   "background": {
     "scripts": ["background.js"]
@@ -18,7 +19,7 @@
     {
       "matches": ["https://www.linkedin.com/jobs/search/?*"],
       "run_at": "document_start",
-      "js": ["script-loader.js"],
+      "js": ["block.js", "lijfce.js"],
       "css": ["lijfce.css"]
     }
   ],

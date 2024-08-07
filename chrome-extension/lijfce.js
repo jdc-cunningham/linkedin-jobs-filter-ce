@@ -41,37 +41,28 @@ const addGenericClickHandler = () => {
     const thisParent = e.target.parentElement;
     const thisGrandParent = thisParent.parentElement;
     const comp = thisGrandParent.querySelector('.job-card-container__primary-description');
-    const compName = comp.innerText;
+    const comp2 = jobNode.querySelector('.artdeco-entity-lockup__subtitle');
+    const compName = comp?.innerText ?? comp2?.innerText;
 
-    if (targClass.includes('lijfce-btns__block') && compName) {
-      blockCompany(compName);
-    }
+    if (targClass.includes('job-card-list')) {
+      const jobDesc = document.querySelector('.jobs-description-content__text');
 
-    if (targClass.includes('lijfce-btns__applied') && compName) {
-      appliedToCompany(compName);
+      jobDesc.style.backgroundColor = '#ffffff'; // reset back to white
+
+      setTimeout(() => {
+        const jobText = jobDesc.innerText.toLowerCase();
+        const matchDegreeWords = ['degree', "bachelor's", "master's"];
+        const blockedStack = ['.net', 'drupal', 'ios', 'swift', 'c#', 'c++', 'springboot', 'kotlin'];
+        
+        if (matchDegreeWords.some(word => jobText.includes(word))) {
+          jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+        } else if (blockedStack.some(stack => jobText.includes(stack))) {
+          jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+        }
+      }, 500);
     }
 
     e.preventDefault();
-  });
-}
-
-const injectButtons = () => {
-  document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
-    const comp = jobNode.querySelector('.job-card-container__primary-description');
-    const compNodeParent = comp?.parentElement;
-
-    // check if buttons not already in place
-    const btns = compNodeParent?.querySelector('.lijfce-btns');
-
-    if (!btns) {
-      // inject btns with attributes
-      const customBtns = `<div class="lijfce-btns">
-        <button type="button" class="lijfce-btns__block" title="block company">x</button>
-        <button type="button" class="lijfce-btns__applied" title="applied">+</button>
-      </div>`;
-
-      compNodeParent.innerHTML += customBtns;
-    }
   });
 }
 
@@ -84,8 +75,6 @@ const filterJobs = (blockedCompanies) => {
       jobNode.remove();
     }
   });
-
-  injectButtons();
 }
 
 const bindScrollEvent = (jobsPanel) => jobsPanel.addEventListener('scrollend', () => {
@@ -151,10 +140,6 @@ const listenToJobsPanelScroll = async () => {
   const jobPanel = await waitForJobsPanel();
 
   bindScrollEvent(jobPanel);
-
-  setTimeout(() => {
-    injectButtons();
-  }, 1500); // job panel re-renders
 }
 
 const injectStatsPanel = () => {
@@ -168,6 +153,22 @@ const injectStatsPanel = () => {
   statsDiv.setAttribute('class', 'lijfce__stats-panel');
   document.querySelector('.scaffold-layout-toolbar').appendChild(statsDiv);
 }
+
+// get msgs from popup ui
+chrome.runtime.onMessage.addListener((request, sender, callback) => {
+  const msg = request;
+
+  if (msg?.applied) {
+    appliedToCompany(msg.applied);
+  }
+
+  if (msg?.block) {
+    blockCompany(msg.block);
+  }
+
+  // sendMessageToLogic('from dom');
+  callback('dom ack');
+});
 
 // first load, starts here
 window.onload = async () => {
