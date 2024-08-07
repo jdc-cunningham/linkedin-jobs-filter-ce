@@ -5,7 +5,8 @@ const blockedTitles = [
   'senior',
   'platform',
   'devops',
-  'sdet'
+  'sdet',
+  'junior'
 ];
 
 const matchDegreeWords = ['degree', "bachelor", "master's"];
