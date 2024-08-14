@@ -1,7 +1,9 @@
-const blockedTitles = [];
-
 const matchDegreeWords = [];
 const blockedStack = [];
+
+const blockedTitles = [
+  ...blockedStack,
+];
 
 const personal = [];
 
