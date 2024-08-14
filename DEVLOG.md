@@ -10,6 +10,8 @@ want to filter:
   - company
 - job description
 
+figure out issue of example file it's like .env but people are expected to make that
+
 ### 08/13/2024
 
 7:38 PM

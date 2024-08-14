@@ -23,9 +23,9 @@ See the `manifest.json` file on what is being used.
 
 It binds a `scrollend` handler to the job list on the left. Then it removes job nodes based on your filter. The blocked company list grows via a `localStorage` entry as you block more companies. A stats panel is also injected (blue top-left) which can show a counter for jobs you applied to so far.
 
-### Development Note
+### Development Notes
 
-When you modify files in a loaded extension you have to refresh it in the Chrome Extensions page.
+When you modify files in a loaded extension you have to refresh it in the Chrome Extensions page and reload the webpage the extension is running on.
 
 ### Manifest v2
 
