@@ -1,6 +1,6 @@
 ### About
 
-<img src="icon48.png"/>
+<img src="./chrome-extension/icon48.png"/>
 
 This chrome extension filters LinkedIn jobs further with your own list of blocked companies. The jobs are lazy loaded in and a lot of them are promoted. For me in this case I'm avoiding recruiting/consulting companies and trying to target companies directly.
 
