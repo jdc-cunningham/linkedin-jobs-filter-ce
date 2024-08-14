@@ -4,6 +4,12 @@ script files
   - interactions
   - filters
 
+want to filter:
+- job card
+  - title
+  - company
+- job description
+
 ### 08/13/2024
 
 7:38 PM
