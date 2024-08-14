@@ -1,6 +1,7 @@
 let observerStarted = false;
 let observerTimeout;
 
+// https://stackoverflow.com/a/29405370/2710227
 const startObserver = (target, filterJobDetails) => {
   var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {

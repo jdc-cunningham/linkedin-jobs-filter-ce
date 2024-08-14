@@ -84,7 +84,16 @@ const loadFilters = () => {
 }
 
 const filterJobDetails = (jobDetailsText) => {
-  console.log('>>>', jobDetailsText);
+  const jobDesc = document.querySelector('.jobs-description-content__text');
+  const jobText = jobDetailsText.toLowerCase();
+  
+  jobDesc.style.backgroundColor = '#ffffff'; // reset back to white
+  
+  if (matchDegreeWords.some(word => jobText.includes(word) && !(jobText.includes('equivalent') && jobText.includes('experience')))) {
+    jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+  } else if (blockedStack.some(stack => jobText.includes(stack))) {
+    jobDesc.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+  }
 }
 
 // get msgs from popup ui

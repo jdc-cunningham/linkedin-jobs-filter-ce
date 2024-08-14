@@ -18,7 +18,8 @@ const blockedTitles = [
   '.ai',
   'cloud',
   'artificial intelligence',
-  'mainframe'
+  'mainframe',
+  'qa engineer'
 ];
 
 const personal = [
