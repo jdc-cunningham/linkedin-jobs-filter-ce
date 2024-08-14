@@ -1,3 +1,13 @@
+// check for block.js variables
+// due to gitignore
+
+// can loop this
+if (typeof blockedTitles === undefined) blockedTitles = [];
+if (typeof matchDegreeWords === undefined) matchDegreeWords = [];
+if (typeof blockedStack === undefined) blcokedStack = [];
+if (typeof personal === undefined) personal = [];
+if (typeof blockedCompanies === undefined) blockedCompanies = [];
+
 let allBlockedJobs = [];
 
 // lol
@@ -70,8 +80,12 @@ const filterJobs = (blockedCompanies) => {
   document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
     const comp = jobNode.querySelector('.job-card-container__primary-description');
     const compName = comp?.innerText;
+    const title = jobNode.querySelector('.job-card-list__title');
+    const titleText = title?.innerText.toLowerCase();
 
     if (compName && blockedCompanies.includes(compName)) {
+      jobNode.remove();
+    } else if (titleText && blockedTitles.some(title => titleText.includes(title))) {
       jobNode.remove();
     }
   });

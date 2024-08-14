@@ -1,5 +1,10 @@
+const blockedTitles = [];
+
+const matchDegreeWords = [];
+const blockedStack = [];
+
+const personal = [];
+
 const blockedCompanies = [
-  'Some Company',
-  'Another Company',
-  'etc...'
+  ...personal,
 ];
