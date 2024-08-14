@@ -7,3 +7,5 @@ Need to break the code up into events eg. the scroll, then the filtering is sepa
 Card and job
 
 Job details have to be worked out still, the async load detection
+
+I have used a DOM observer event before I could use that
