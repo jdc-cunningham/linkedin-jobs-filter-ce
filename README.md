@@ -30,6 +30,8 @@ It binds a `scrollend` handler to the job list on the left. Then it removes job 
 
 This communicates with the DOM code to store company names in local storage. This used to be injected into the job search result cards however that started to break the front end due to I believe an XSS measure LinkedIn has.
 
+An applied company will have a green background on the left sidebar.
+
 ### Development Notes
 
 When you modify files in a loaded extension you have to refresh it in the Chrome Extensions page and reload the webpage the extension is running on.
