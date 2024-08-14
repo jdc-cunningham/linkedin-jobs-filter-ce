@@ -19,9 +19,9 @@
     {
       "matches": ["https://www.linkedin.com/jobs/search/?*"],
       "run_at": "document_start",
-      "js": ["filters.js", "main.js"],
+      "js": ["filters.js", "events.js", "main.js"],
       "css": ["style.css"]
     }
   ],
-  "web_accessible_resources": ["filters.js", "main.js"]
+  "web_accessible_resources": ["filters.js", "events.js", "main.js"]
 }

@@ -1,46 +1,83 @@
-let observerStarted = false;
-let observerTimeout;
+let allBlockedJobs = [];
 
-const startObserver = (target) => {
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      // mutation is attributes
-      // fires multiple times, debounce
-      clearTimeout(observerTimeout);
+const applyAppliedFilter = () => {
+  const appliedCompanies = JSON.parse(localStorage.getItem('lijfce-applied-companies'));
 
-      observerTimeout = setTimeout(() => {
-        const jobDetailsText = target.querySelector('.jobs-description-content__text').innerText;
-        console.log(jobDetailsText);
-      }, 50);
+  if (appliedCompanies && appliedCompanies.length) {
+    document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
+      const comp = jobNode.querySelector('.job-card-container__primary-description');
+      const compName = comp?.innerText;
+
+      if (appliedCompanies.includes(compName)) {
+        jobNode.style.backgroundColor = '#AFE1AF';
+        jobNode.style.border = '2px solid green';
+      }
     });
-  });
 
-  // configuration of the observer:
-  var config = { attributes: true, childList: true, characterData: true }
+    const statsPanel = document.querySelector('.lijfce__stats-panel span');
 
-  // pass in the target node, as well as the observer options
-  observer.observe(target, config);
-
-  observerStarted = true;
+    statsPanel.innerText = `Applied to ${appliedCompanies.length} jobs`;
+  }
 }
 
-const addGenericClickHandler = () => {
-  document.addEventListener('click', (e) => {
-    const thisParent = e.target.parentElement;
-    const thisGrandParent = thisParent.parentElement;
-    const targClass = Array.from(e.target.classList);
-    const targClasses = [...targClass, thisParent.classList, thisGrandParent.classList];
-    const cardClasses = ['job-card-list', 'jobs-search-results__list-item'];
+const appliedToCompany = (companyName) => {
+  const appliedCompanies = JSON.parse(localStorage.getItem('lijfce-applied-companies'));
 
-    if (cardClasses.some(cardClass => targClasses.includes(cardClass))) {
-      console.log('card clicked');
+  if (appliedCompanies && !appliedCompanies.includes(companyName)) {
+    appliedCompanies.push(companyName);
 
-      if (!observerStarted) {
-        const jobDetails = document.querySelector('.jobs-search__job-details');
-        startObserver(jobDetails);
-      }
+    localStorage.setItem('lijfce-applied-companies', JSON.stringify(appliedCompanies));
+  } else {
+    localStorage.setItem('lijfce-applied-companies', JSON.stringify([companyName]));
+  }
+
+  applyAppliedFilter();
+}
+
+const filterJobs = (blockedCompanies) => {
+  document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
+    const comp = jobNode.querySelector('.job-card-container__primary-description');
+    const compName = comp?.innerText;
+    const title = jobNode.querySelector('.job-card-list__title');
+    const titleText = title?.innerText.toLowerCase();
+
+    if (compName && blockedCompanies.includes(compName)) {
+      jobNode.remove();
+    } else if (titleText && blockedTitles.some(title => titleText.includes(title))) {
+      jobNode.remove();
     }
   });
 }
 
-addGenericClickHandler();
+// load from filters.js (first run)
+// load from localStorage
+const loadFilters = () => {
+  allBlockedJobs = [];
+
+  // from block.js
+  if (blockedCompanies && blockedCompanies.length) {
+    allBlockedJobs.push(...blockedCompanies);
+  }
+
+  const blockedJobsLs = JSON.parse(localStorage.getItem('lijfce-blocked-companies'));
+
+  if (blockedJobsLs && blockedJobsLs.length) {
+    allBlockedJobs.push(...blockedJobsLs);
+  }
+
+  filterJobs(allBlockedJobs);
+}
+
+const filterJobDetails = (jobDetailsText) => {
+  console.log('>>>', jobDetailsText);
+}
+
+window.onload = async () => {
+  loadFilters();
+  listenToJobsPanelScroll();
+  addGenericClickHandler(filterJobDetails);
+
+  setTimeout(() => {
+    applyAppliedFilter();
+  }, 3000);
+};
