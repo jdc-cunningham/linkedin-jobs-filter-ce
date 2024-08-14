@@ -1,8 +1,5 @@
 const matchDegreeWords = ['degree', "bachelor", "master's"];
-const blockedStack = [
-  '.net', 'drupal', 'ios', 'swift', 'c#', 'c++', 'springboot', 'kotlin', 'angular', 'react native',
-  'snowflake'
-];
+const blockedStack = [];
 
 const blockedTitles = [
   ...blockedStack,
@@ -19,7 +16,18 @@ const blockedTitles = [
   'cloud',
   'artificial intelligence',
   'mainframe',
-  'qa engineer'
+  'qa engineer',
+  '.net',
+  'drupal',
+  'ios',
+  'swift',
+  'c#',
+  'c++',
+  'springboot',
+  'kotlin',
+  'angular',
+  'react native',
+  'snowflake'
 ];
 
 const personal = [

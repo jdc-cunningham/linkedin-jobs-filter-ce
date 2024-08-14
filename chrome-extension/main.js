@@ -84,7 +84,7 @@ const loadFilters = () => {
 }
 
 const filterJobDetails = (jobDetailsText) => {
-  const jobDesc = document.querySelector('.jobs-description-content__text');
+  const jobDesc = document.querySelector('.jobs-search__job-details');
   const jobText = jobDetailsText.toLowerCase();
   
   jobDesc.style.backgroundColor = '#ffffff'; // reset back to white
