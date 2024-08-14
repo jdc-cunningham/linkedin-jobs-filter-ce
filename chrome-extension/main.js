@@ -156,18 +156,6 @@ const listenToJobsPanelScroll = async () => {
   bindScrollEvent(jobPanel);
 }
 
-const injectStatsPanel = () => {
-  const appliedCompanies = JSON.parse(localStorage.getItem('lijfce-applied-companies'));
-
-  const statsDiv = document.createElement('div');
-  const statsSpan = document.createElement('span');
-
-  statsSpan.innerText = `Applied to ${appliedCompanies ? appliedCompanies.length : 0} jobs`;
-  statsDiv.appendChild(statsSpan);
-  statsDiv.setAttribute('class', 'lijfce__stats-panel');
-  document.querySelector('.scaffold-layout-toolbar').appendChild(statsDiv);
-}
-
 // get msgs from popup ui
 chrome.runtime.onMessage.addListener((request, sender, callback) => {
   const msg = request;
@@ -191,7 +179,6 @@ window.onload = async () => {
   addGenericClickHandler();
 
   setTimeout(() => {
-    injectStatsPanel(); // appears under job filter bar
     applyAppliedFilter();
   }, 3000);
 };

@@ -16,7 +16,9 @@ const blockedTitles = [
   'junior',
   'chief',
   '.ai',
-  'cloud'
+  'cloud',
+  'artificial intelligence',
+  'mainframe'
 ];
 
 const personal = [
