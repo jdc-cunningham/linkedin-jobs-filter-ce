@@ -34,6 +34,21 @@ const appliedToCompany = (companyName) => {
   applyAppliedFilter();
 }
 
+const blockCompany = (companyName) => {
+  if (!allBlockedJobs.includes(companyName)) {
+    const blockedJobsLs = JSON.parse(localStorage.getItem('lijfce-blocked-companies'));
+
+    if (!blockedJobsLs?.length) {
+      localStorage.setItem('lijfce-blocked-companies', JSON.stringify([companyName]))
+    } else {
+      blockedJobsLs.push(companyName);
+      localStorage.setItem('lijfce-blocked-companies', JSON.stringify(blockedJobsLs));
+    }
+
+    loadBlockedJobs();
+  }
+}
+
 const filterJobs = (blockedCompanies) => {
   document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
     const comp = jobNode.querySelector('.job-card-container__primary-description');
@@ -71,6 +86,22 @@ const loadFilters = () => {
 const filterJobDetails = (jobDetailsText) => {
   console.log('>>>', jobDetailsText);
 }
+
+// get msgs from popup ui
+chrome.runtime.onMessage.addListener((request, sender, callback) => {
+  const msg = request;
+
+  if (msg?.applied) {
+    appliedToCompany(msg.applied);
+  }
+
+  if (msg?.block) {
+    blockCompany(msg.block);
+  }
+
+  // sendMessageToLogic('from dom');
+  callback('dom ack');
+});
 
 window.onload = async () => {
   loadFilters();
