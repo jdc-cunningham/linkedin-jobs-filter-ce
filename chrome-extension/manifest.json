@@ -19,9 +19,9 @@
     {
       "matches": ["https://www.linkedin.com/jobs/search/?*"],
       "run_at": "document_start",
-      "js": ["block.js", "lijfce.js"],
-      "css": ["lijfce.css"]
+      "js": ["block.js", "script.js"],
+      "css": ["style.css"]
     }
   ],
-  "web_accessible_resources": ["block.js", "lijfce.js"]
+  "web_accessible_resources": ["block.js", "script.js"]
 }
