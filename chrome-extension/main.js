@@ -45,7 +45,7 @@ const blockCompany = (companyName) => {
       localStorage.setItem('lijfce-blocked-companies', JSON.stringify(blockedJobsLs));
     }
 
-    loadBlockedJobs();
+    loadFilters();
   }
 }
 
