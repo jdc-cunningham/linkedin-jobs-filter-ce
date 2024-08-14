@@ -24,10 +24,6 @@ const applyAppliedFilter = () => {
         jobNode.style.border = '2px solid green';
       }
     });
-
-    const statsPanel = document.querySelector('.lijfce__stats-panel span');
-
-    statsPanel.innerText = `Applied to ${appliedCompanies.length} jobs`;
   }
 }
 
