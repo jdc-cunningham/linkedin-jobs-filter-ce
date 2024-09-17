@@ -1,4 +1,9 @@
+// automatically filled in by scroll filter
 let allBlockedJobs = [];
+
+// put jobs in here and remove duplicates in sidebar
+// joins job title and company
+let uniqueJobs = [];
 
 const applyAppliedFilter = () => {
   const appliedCompanies = JSON.parse(localStorage.getItem('lijfce-applied-companies'));
@@ -13,10 +18,6 @@ const applyAppliedFilter = () => {
         jobNode.style.border = '2px solid green';
       }
     });
-
-    const statsPanel = document.querySelector('.lijfce__stats-panel span');
-
-    statsPanel.innerText = `Applied to ${appliedCompanies.length} jobs`;
   }
 }
 
@@ -34,6 +35,7 @@ const appliedToCompany = (companyName) => {
   applyAppliedFilter();
 }
 
+// this is only used for personal companies eg. for me FAANG since I don't have a degree
 const blockCompany = (companyName) => {
   if (!allBlockedJobs.includes(companyName)) {
     const blockedJobsLs = JSON.parse(localStorage.getItem('lijfce-blocked-companies'));
@@ -49,12 +51,19 @@ const blockCompany = (companyName) => {
   }
 }
 
-const filterJobs = (blockedCompanies) => {
+const filterJobs = () => {
   document.querySelectorAll('.jobs-search-results__list-item').forEach(jobNode => {
     const comp = jobNode.querySelector('.job-card-container__primary-description');
     const compName = comp?.innerText;
     const title = jobNode.querySelector('.job-card-list__title');
     const titleText = title?.innerText.toLowerCase();
+    const combinedText = titleText + compName;
+
+    if (uniqueJobs.includes(combinedText)) {
+      // jobNode.remove();
+    } else {
+      uniqueJobs.push(combinedText);
+    }
 
     if (compName && blockedCompanies.includes(compName)) {
       jobNode.remove();
@@ -80,7 +89,7 @@ const loadFilters = () => {
     allBlockedJobs.push(...blockedJobsLs);
   }
 
-  filterJobs(allBlockedJobs);
+  filterJobs();
 }
 
 const filterJobDetails = (jobDetailsText) => {

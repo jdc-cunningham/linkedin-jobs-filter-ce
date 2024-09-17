@@ -1,6 +1,7 @@
 let observerStarted = false;
 let observerTimeout;
 
+// wait for job description to load after clicking on a job in the left sidebar
 // https://stackoverflow.com/a/29405370/2710227
 const startObserver = (target, filterJobDetails) => {
   var observer = new MutationObserver(function(mutations) {
@@ -17,11 +18,10 @@ const startObserver = (target, filterJobDetails) => {
   });
 
   // configuration of the observer:
-  var config = { attributes: true, childList: true, characterData: true }
+  var config = { attributes: true, childList: true, characterData: true };
 
   // pass in the target node, as well as the observer options
   observer.observe(target, config);
-
   observerStarted = true;
 }
 
@@ -43,9 +43,7 @@ const addGenericClickHandler = (filterJobDetails) => {
 }
 
 const bindScrollEvent = (jobsPanel) => jobsPanel.addEventListener('scrollend', () => {
-  if (allBlockedJobs.length) {
-    filterJobs(allBlockedJobs);
-  }
+  filterJobs();
 });
 
 const getJobPanel = () => document.querySelector('.jobs-search-results-list');

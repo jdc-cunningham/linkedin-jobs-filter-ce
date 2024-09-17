@@ -8,6 +8,8 @@ I HAVE THE POWER!!!
 
 Had to borrow money from a friend and wait a night to get power. As I mentioned my car is destroyed so a new job is what will save me from my current life situation.
 
+In the past I had avoided recruiting/consulting companies, wanted to get hired on directly by a company but on LinkedIn I would say like 80% of the job postings are by recruiting/consulting companies... so I'll filter duplicates but apply to them if qualified for the job. I'll also look into/rate the company.
+
 ---
 
 ### 09/14/2024

@@ -12,9 +12,6 @@
     "default_icon": "icon16.png",
     "default_popup": "./popup-ui/index.html"
   },
-  "background": {
-    "scripts": ["background.js"]
-  },
   "content_scripts": [
     {
       "matches": ["https://www.linkedin.com/jobs/search/?*"],
