@@ -1,3 +1,15 @@
+### 09/17/2024
+
+12:48 PM
+
+I HAVE THE POWER!!!
+
+(power went out)
+
+Had to borrow money from a friend and wait a night to get power. As I mentioned my car is destroyed so a new job is what will save me from my current life situation.
+
+---
+
 ### 09/14/2024
 
 1:19 AM
